@@ -1,0 +1,6 @@
+# The fifth test file
+#--------------------
+# In this file, the number after
+# the varlist name is not an integer
+varlist array five
+1 2 3 4 5 6

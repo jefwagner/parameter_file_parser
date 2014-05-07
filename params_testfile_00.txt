@@ -1,0 +1,7 @@
+# The first test file
+#--------------------
+# This file does not use keywords
+# so it should fail.
+best 01
+worst 02
+best and worst 03

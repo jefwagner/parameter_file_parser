@@ -1,0 +1,19 @@
+# The seventh test file
+#--------------------
+# Test the var types
+var first 1
+var second 3.14
+var third meshugina
+#--------------------
+# put a comment in the middle
+# then try a varlist
+varlist intarray 10
+1 2 3 4 5 6 7 8 9 10
+# nother comment
+varlist floatarray 5
+1.0 2.0 3.14 4.0 5.0
+varlist stringarray 3
+first second third
+# varlist with multiply types
+varlist mydata 3 # with a comment in between
+jef 31.99 1
