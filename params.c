@@ -372,7 +372,7 @@ int pdata_get_array_s( pdata *pd, const char *name, char **val){
  * that data type. This can be used to write simple wrappers to fill
  * up custom defined structs.
  */
-int pdata_get_varlist( pdata *pd, const char *name, int num, ...){
+int pdata_get_list( pdata *pd, const char *name, int num, ...){
   int i, *j;
   double *d;
   char *s;

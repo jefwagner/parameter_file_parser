@@ -6,7 +6,7 @@
 int main( void){
   int i, status;
   FILE *file;
-  char filename[] = "params_testfile_00.txt";
+  char filename[] = "params_testfiles/params_testfile_00.txt";
   int jj, jarray[10];
   double dd, darray[5];
   char str[80], str0[80], str1[80], str2[80], **strarray;
@@ -19,7 +19,8 @@ int main( void){
   for( i=0; i<6; i++){
     pdata_initialize( &pd);
     printf( "Testing param_testfile_%02d.txt\n", i);
-    sprintf( filename, "params_testfile_%02d.txt", i);
+    sprintf( filename, 
+            "params_testfiles/params_testfile_%02d.txt", i);
     file = fopen( filename, "r");
     status = pdata_read_file( &pd, file);
     fclose( file);
@@ -30,7 +31,8 @@ int main( void){
 
   pdata_initialize( &pd);
   printf( "Testing param_testfile_%02d.txt\n", 6);
-  sprintf( filename, "params_testfile_%02d.txt", 6);
+  sprintf( filename, 
+          "params_testfiles/params_testfile_%02d.txt", 6);
   file = fopen( filename, "r");
   status = pdata_read_file( &pd, file);
   fclose( file);
@@ -98,7 +100,7 @@ int main( void){
     printf( "\n");
   }
 
-  status = pdata_get_varlist( &pd, "mydata", 3, 
+  status = pdata_get_list( &pd, "mydata", 3, 
 			      STRING_T, str, 
 			      DOUBLE_T, &dd, 
 			      INT_T, &jj);
