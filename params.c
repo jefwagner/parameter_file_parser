@@ -79,6 +79,10 @@ static void ht_add( pdata *pd, unsigned int index,
 
 /*!
  * Shift entries in a hash table down.
+ *
+ * If the hash table already has an entry at the hashed key `hkey`
+ * then we need to shift all the currently filled members down to
+ * insert the new value.
  */
 static void ht_shift_down( pdata *pd, unsigned int index){
   unsigned int k = 0;
@@ -147,56 +151,6 @@ static int hashtab_insert( pdata *pd, const char *key,
   return HT_FAILURE;
 }
 
-/*!
- * Shift the hashtable up.
- */
-static void ht_shift_up( pdata *pd, unsigned int index){
-  unsigned int i, j;
-  int diff;
-
-  i=index;
-  j=1;
-  while( pd->array[(i+j)%MAX_ARRAY_SIZE].key[0] != '\0'){
-    diff = ((int) pd->array[(i+j)%MAX_ARRAY_SIZE].hkey) - ((int) i);
-    if( diff >= MAX_ARRAY_SIZE/2 ){ diff -= (int) MAX_ARRAY_SIZE; }
-    if( diff <= 0 ){
-      pd->array[i].hkey = pd->array[(i+j)%MAX_ARRAY_SIZE].hkey;
-      strcpy( pd->array[i].key, 
-             pd->array[(i+j)%MAX_ARRAY_SIZE].key);
-      strcpy( pd->array[i].value, 
-             pd->array[(i+j)%MAX_ARRAY_SIZE].value);
-      pd->array[(i+j)%MAX_ARRAY_SIZE].key[0] = '\0';
-      i = (i+j)%MAX_ARRAY_SIZE;
-      j = 0;
-    }
-    j++;
-  }
-}
-
-/*!
- * Remove item from hashtable.
- */
-static int hashtab_remove( pdata *pd, const char *key, char *value){
-  unsigned int i, hkey;
-
-  /*! Hash the key */
-  hkey = oat_hash( key) % MAX_ARRAY_SIZE;
-  i = hkey;
-
-  while( strcmp( pd->array[i].key, key) != 0 && 
-   pd->array[i].key[0] != '\0'){
-    i=(i+1)%MAX_ARRAY_SIZE;
-  }
-  if( pd->array[i].key[0] == '\0'){
-    return HT_FAILURE;
-  }
-
-  strcpy( value, pd->array[i].value);
-  pd->array[i].key[0] = '\0';
-  pd->array_size--;
-  ht_shift_up( pd, i);
-  return HT_SUCCESS;
-}
 
 /*!
  * Starting the section of reading the parameter file.

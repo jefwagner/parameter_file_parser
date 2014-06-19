@@ -36,5 +36,3 @@ list box_size 10.0 10.0
 list tempuratures 
 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 10
 ```
-
-These files let you very easily read in a file such as this
