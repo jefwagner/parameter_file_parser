@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "params.h"
 
@@ -99,6 +100,37 @@ int main( void){
     }
     printf( "\n");
   }
+
+  status = pdata_get_element_i( &pd, "intarray", 5, &jj);
+  if( status == PDATA_SUCCESS){
+    printf( "Success: Read %uth element from \"intarray\"\n", 5);
+    if( jj == jarray[5] ){
+      printf( "Success: Matched the %uth element above: %d \n", 
+             5, jj);
+    }
+  }
+  status = pdata_get_element_d( &pd, "floatarray", 3, &dd);
+  if( status == PDATA_SUCCESS){
+    printf( "Success: Read %uth element from \"floatarray\"\n", 3);
+    if( dd == darray[3] ){
+      printf( "Success: Matched the %uth element above: %f \n", 
+             3, dd);
+    }
+  }
+  status = pdata_get_element_s( &pd, "stringarray", 1, str);
+  if( status == PDATA_SUCCESS){
+    printf( "Success: Read %uth element from \"stringarray\"\n", 1);
+    if( strcmp( str, strarray[1]) == 0 ){
+      printf( "Success: Matched the %uth element above: %s \n", 
+             1, str);
+    }
+  }
+  status = pdata_get_element_s( &pd, "stringarray", 500, str);
+  if( status == PDATA_FAILURE){
+    printf( "Success: could not read %uth element from \"stringarray\"\n", 
+           500);
+  }
+
 
   status = pdata_get_list( &pd, "mydata", 3, 
 			      STRING_T, str, 
